@@ -2,7 +2,7 @@
   <div class="dashboard-container">
     <el-card class="box-card" shadow="never">
       <div class="msg-text">
-        『 做有意义的事，做有价值的公司 』 —— 大学士
+        『 做有意义的事，做有价值的公司 』 —— 美优洁车
       </div>
       <div class="user-content">
         <div class="avatar">
