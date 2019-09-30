@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-let model = '/product'
+let model = '/service'
 
 export function getList(data) {
   return request({

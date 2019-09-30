@@ -3,17 +3,22 @@
     <el-row class="filter-container" :gutter="10">
       <el-col :sm="4">
         <el-input
-          v-model="listQuery.nickname"
-          size="small"
+          v-model="listQuery.mobile"
+          size="medium"
           prefix-icon="el-icon-search"
-          placeholder="输入昵称搜索"
+          placeholder="输入手机号码搜索"
           clearable
           @keyup.enter.native="handleFilter"
         />
       </el-col>
       <el-col :sm="3">
-        <el-select v-model="listQuery.type" placeholder="记录类型" size="small" clearable>
+        <el-select v-model="listQuery.type" placeholder="记录类型" size="medium" clearable>
           <el-option v-for="item in typeOptions" :key="item.key" :label="item.name" :value="item.key" />
+        </el-select>
+      </el-col>
+      <el-col :sm="3">
+        <el-select v-model="listQuery.origin" placeholder="使用设备" size="medium" clearable>
+          <el-option v-for="item in originOptions" :key="item.key" :label="item.name" :value="item.key" />
         </el-select>
       </el-col>
       <el-col :sm="6">
@@ -21,7 +26,7 @@
           v-model="listQuery.date_range"
           type="daterange"
           align="right"
-          size="small"
+          size="medium"
           unlink-panels
           range-separator="-"
           start-placeholder="记录开始日期"
@@ -33,7 +38,7 @@
         />
       </el-col>
       <el-col :sm="5">
-        <el-button v-waves type="primary" icon="el-icon-search" size="small" @click="handleFilter">
+        <el-button v-waves type="primary" icon="el-icon-search" size="medium" @click="handleFilter">
           搜索
         </el-button>
       </el-col>
@@ -42,7 +47,7 @@
       <el-table v-loading="listLoading" :data="list" border fit highlight-current-row size="mini" style="font-size: 14px;">
         <el-table-column label="手机号码" width="150">
           <template slot-scope="{row}">
-            <span class="link-type" @click="handleView(row.uid)">{{ row.mobile }}</span>
+            <span class="link-type" @click="handleViewUser(row.user_id)">{{ row.mobile }}</span>
           </template>
         </el-table-column>
 
@@ -54,22 +59,31 @@
 
         <el-table-column label="记录类型" width="150">
           <template slot-scope="{row}">
-            <span>{{ row.type }}</span>
+            <span>{{ row.type === 1 ? '登录' : '注册' }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column label="ip地址" min-width="180" class="fixed-width">
+        <el-table-column label="使用设备" width="150">
+          <template slot-scope="{row}">
+            <span>{{ row.origin }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="ip地址" width="180">
           <template slot-scope="{row}">
             <span>{{ row.ip }}</span>
           </template>
         </el-table-column>
-
+        <el-table-column label="浏览器" fixed="right" min-width="220" class-name="fixed-width">
+          <template slot-scope="{row}">
+            <span>{{ row.browser }}</span>
+          </template>
+        </el-table-column>
       </el-table>
     </div>
 
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
 
-    <user-info :user-id="userId" :info-visible.sync="infoVisible" />
+    <user-info :user-id="userId" :info-visible.sync="userVisible" />
 
   </div>
 </template>
@@ -159,7 +173,7 @@ export default {
         limit: 10,
         sort: '-id'
       },
-      infoVisible: false,
+      userVisible: false,
       userId: 0
     }
   },
@@ -183,9 +197,9 @@ export default {
       this.getList()
     },
 
-    handleView(id) {
+    handleViewUser(id) {
       this.userId = id
-      this.infoVisible = true
+      this.userVisible = true
     }
 
   }

@@ -6,20 +6,15 @@
           v-model="listQuery.username"
           size="medium"
           prefix-icon="el-icon-search"
-          placeholder="输入手机号搜索"
+          placeholder="输入花名搜索"
           clearable
           @keyup.enter.native="handleFilter"
         />
       </el-col>
-      <el-col :sm="4">
-        <el-input
-          v-model="listQuery.username"
-          size="medium"
-          prefix-icon="el-icon-search"
-          placeholder="输入管理员姓名搜索"
-          clearable
-          @keyup.enter.native="handleFilter"
-        />
+      <el-col :sm="3">
+        <el-select v-model="listQuery.department" size="medium" placeholder="部门" clearable>
+          <el-option v-for="item in departmentOptions" :key="item.value" :label="item.label" :value="item.value" />
+        </el-select>
       </el-col>
       <el-col :sm="3">
         <el-select v-model="listQuery.role_id" size="medium" placeholder="角色" clearable>
@@ -31,7 +26,7 @@
           <el-option v-for="item in statusOptions" :key="item.key" :label="item.name" :value="item.key" />
         </el-select>
       </el-col>
-      <el-col :sm="10">
+      <el-col :sm="11">
         <el-button v-waves type="primary" size="medium" icon="el-icon-search" @click="handleFilter">
           搜索
         </el-button>
@@ -52,14 +47,25 @@
         style="font-size: 14px;"
         @sort-change="sortChange"
       >
-        <el-table-column label="手机号码" width="180">
+        <el-table-column label="花名" width="150">
           <template slot-scope="{row}">
             <span>{{ row.username }}</span>
+            <el-tag type="success" size="small">{{ row.department }}</el-tag>
           </template>
         </el-table-column>
         <el-table-column label="姓名" width="150">
           <template slot-scope="{row}">
             <span>{{ row.true_name }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="手机号码" width="150">
+          <template slot-scope="{row}">
+            {{ row.mobile }}
+          </template>
+        </el-table-column>
+        <el-table-column label="所属部门" width="150">
+          <template slot-scope="{row}">
+            {{ row.department }}
           </template>
         </el-table-column>
         <el-table-column label="角色" width="200">
@@ -111,12 +117,20 @@
     <el-dialog :title="textMap[dialogStatus]" width="700px" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="120px" style="width: 400px; margin-left:50px;">
 
-        <el-form-item label="姓名" prop="true_name">
+        <el-form-item label="真实姓名" prop="true_name">
           <el-input v-model="temp.true_name" />
         </el-form-item>
 
-        <el-form-item label="手机号码" prop="username">
-          <el-input v-model="temp.username" maxlength="11" @keyup.native="number" />
+        <el-form-item label="花名" prop="username">
+          <el-input v-model="temp.username" />
+        </el-form-item>
+
+        <el-form-item label="手机号码" prop="mobile">
+          <el-input v-model="temp.mobile" maxlength="11" @keyup.native="number" />
+        </el-form-item>
+
+        <el-form-item label="所在部门" prop="department">
+          <el-input v-model="temp.department" maxlength="20" @keyup.native="number" />
         </el-form-item>
 
         <el-form-item label="状态">
@@ -155,6 +169,7 @@ import {
   getList,
   edit,
   create,
+  getDepartmentOptions,
   changeStatus,
   getAdminPermissions
 } from '@/api/admin'
@@ -187,6 +202,8 @@ export default {
         limit: 10,
         sort: '-id'
       },
+      multipleSelection: [],
+      departmentOptions: [],
       roleOptions: [],
       statusOptions: [{
         name: '在职中',
@@ -197,8 +214,11 @@ export default {
         key: 2
       }
       ],
+
+      showReviewer: false,
       temp: {},
       dialogFormVisible: false,
+      permissionDialogVisble: false,
       dialogStatus: '',
       textMap: {
         update: '编辑管理员',
@@ -211,6 +231,7 @@ export default {
   created() {
     this.getList()
     this.getRoleOptions()
+    this.getDepartmentOptions()
     this.getPermissionOptions()
   },
   methods: {
@@ -256,6 +277,11 @@ export default {
         this.list = response.data.list
         this.total = response.data.total
         this.listLoading = false
+      })
+    },
+    getDepartmentOptions() {
+      getDepartmentOptions().then(response => {
+        this.departmentOptions = response.data.options
       })
     },
     handleFilter() {
@@ -336,5 +362,12 @@ export default {
 </script>
 
 <style lang="scss">
+  .filter-container {
+    margin-bottom: 25px;
+  }
 
+  .filter-item {
+    margin-right: 15px;
+    width: 160px;
+  }
 </style>

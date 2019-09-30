@@ -34,7 +34,7 @@
 
         <el-table-column label="预览" width="180">
           <template slot-scope="{row}">
-            <el-image style="width: 80px; height: 80px; border-radius: 10px;" :src="row.full_url" fit="cover" @click="handlePreview(row.full_url)" />
+            <el-image class="table-image" :src="row.full_url" fit="cover" @click="handlePreview(row.full_url)" />
           </template>
         </el-table-column>
 

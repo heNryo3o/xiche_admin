@@ -60,7 +60,7 @@ export const constantRoutes = [{
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
       meta: {
-        title: '江苏乐众管理后台',
+        title: '大学士管理后台',
         icon: 'dashboard',
         breadcrumb: false
       }
@@ -73,7 +73,7 @@ export const asyncRoutes = [{
     component: Layout,
     name: 'User',
     meta: {
-      title: '用户管理',
+      title: '平台用户',
       icon: 'user',
       breadcrumb: false
     },
@@ -86,11 +86,27 @@ export const asyncRoutes = [{
         }
       },
       {
-        path: 'user-log',
-        component: () => import('@/views/user/user-log'),
-        name: 'UserLog',
+          path: 'user-log',
+          component: () => import('@/views/user/user-log'),
+          name: 'UserLog',
+          meta: {
+            title: '登录注册日志'
+          }
+        },
+      {
+        path: 'validate-person',
+        component: () => import('@/views/user/validate-person'),
+        name: 'ValidatePerson',
         meta: {
-          title: '登录注册日志'
+          title: '个人认证'
+        }
+      },
+      {
+        path: 'validate-company',
+        component: () => import('@/views/user/validate-company'),
+        name: 'ValidateCompany',
+        meta: {
+          title: '企业认证'
         }
       }
     ]
@@ -99,28 +115,244 @@ export const asyncRoutes = [{
   {
     path: '/store',
     component: Layout,
-    name: 'Store',
+    name: 'Task',
     meta: {
-      title: '商家管理',
+      title: '店铺相关',
       icon: 'store',
       breadcrumb: false
     },
-    children: [{
+    children: [
+      {
         path: 'store-list',
         component: () => import('@/views/store/store-list'),
         name: 'StoreList',
         meta: {
-          title: '商家列表'
+          title: '店铺管理'
         }
       },
       {
-        path: 'product-list',
-        component: () => import('@/views/store/product-list'),
-        name: 'ProductList',
+        path: 'service-list',
+        component: () => import('@/views/store/service-list'),
+        name: 'ServiceList',
         meta: {
-          title: '商品列表'
+          title: '服务管理'
+        }
+      },
+      {
+        path: 'case',
+        component: () => import('@/views/store/case-list'),
+        name: 'Case',
+        meta: {
+          title: '案例管理'
+        }
+      },
+    ]
+  },
+
+  {
+    path: '/operation',
+    component: Layout,
+    name: 'Operation',
+    meta: {
+      title: '运营相关',
+      icon: 'operation',
+      breadcrumb: false
+    },
+    children: [{
+        path: 'news',
+        component: () => import('@/views/operation/news-list'),
+        name: 'News',
+        meta: {
+          title: '新闻管理',
+          noCache: false,
+        }
+      },
+      {
+        path: 'news-edit/:id(\\d+)',
+        component: () => import('@/views/operation/news-edit'),
+        name: 'NewsEdit',
+        meta: {
+          title: '发布新闻',
+          noCache: false,
+          activeMenu: '/operation/news'
+        },
+        hidden: true
+      },
+      {
+        path: 'help',
+        component: () => import('@/views/operation/help'),
+        name: 'Help',
+        meta: {
+          title: '帮助中心'
+        }
+      },
+      {
+        path: 'friendly-links',
+        component: () => import('@/views/operation/friendly-links'),
+        name: 'FriendlyLinks',
+        meta: {
+          title: '友情链接'
         }
       }
+    ]
+  },
+
+  {
+    path: '/task',
+    component: Layout,
+    name: 'Task',
+    meta: {
+      title: '需求管理',
+      icon: 'task',
+      breadcrumb: false
+    },
+    children: [{
+      path: 'task-list',
+      component: () => import('@/views/task/task-list'),
+      name: 'TaskList',
+      meta: {
+        title: '需求列表'
+      }
+    },
+    {
+      path: 'task-join',
+      component: () => import('@/views/task/task-join'),
+      name: 'TaskJoin',
+      meta: {
+        title: '参与任务记录'
+      }
+    }]
+  },
+
+  {
+    path: '/offline',
+    component: Layout,
+    name: 'Offline',
+    meta: {
+      title: '线下对接',
+      icon: 'offline',
+      breadcrumb: false
+    },
+    children: [{
+        path: 'offline-list',
+        component: () => import('@/views/offline/offline-list'),
+        name: 'OfflineList',
+        meta: {
+          title: '项目列表'
+        }
+      },
+      {
+        path: 'offline-calculate',
+        component: () => import('@/views/offline/offline-calculate'),
+        name: 'OfflineCalculate',
+        meta: {
+          title: '对接统计'
+        }
+      }
+    ]
+  },
+
+  {
+    path: '/vip',
+    component: Layout,
+    name: 'System',
+    meta: {
+      title: '会员相关',
+      icon: 'vip',
+      breadcrumb: false
+    },
+    children: [{
+        path: 'version',
+        component: () => import('@/views/vip/version'),
+        name: 'version',
+        meta: {
+          title: '会员版本'
+        }
+      },
+      {
+        path: 'offline-order',
+        component: () => import('@/views/vip/offline-order'),
+        name: 'OfflineOrder',
+        meta: {
+          title: '线下订单'
+        }
+      },
+      {
+        path: 'unapprove-order',
+        component: () => import('@/views/vip/unapprove-order'),
+        name: 'UnapproveOrder',
+        meta: {
+          title: '待审核订单'
+        }
+      }
+    ]
+  },
+
+  {
+    path: '/tuliao',
+    component: Layout,
+    name: 'Push',
+    meta: {
+      title: '涂料频道',
+      icon: 'tuliao',
+      breadcrumb: false
+    },
+    children: [{
+        path: 'question',
+        component: () => import('@/views/tuliao/question'),
+        name: 'Question',
+        meta: {
+          title: '问答版块'
+        }
+      },
+      {
+        path: 'solution-person',
+        component: () => import('@/views/tuliao/solution-person'),
+        name: 'SolutionPerson',
+        meta: {
+          title: '个人解决方'
+        }
+      },
+      {
+        path: 'solution-company',
+        component: () => import('@/views/tuliao/solution-company'),
+        name: 'SolutionCompany',
+        meta: {
+          title: '企业解决方'
+        }
+      },
+      {
+        path: 'news',
+        component: () => import('@/views/tuliao/news'),
+        name: 'News',
+        meta: {
+          title: '行业资讯'
+        }
+      },
+      {
+        path: 'digest',
+        component: () => import('@/views/tuliao/digest'),
+        name: 'Digest',
+        meta: {
+          title: '技术文摘'
+        }
+      },
+      {
+        path: 'hire',
+        component: () => import('@/views/tuliao/hire'),
+        name: 'Hire',
+        meta: {
+          title: '招人才'
+        }
+      },
+      {
+        path: 'seek-job',
+        component: () => import('@/views/tuliao/seek-job'),
+        name: 'SeekJob',
+        meta: {
+          title: '找工作'
+        }
+      },
     ]
   },
 
@@ -191,7 +423,49 @@ export const asyncRoutes = [{
       },
     ]
   },
-
+  {
+    path: '/category',
+    component: Layout,
+    name: 'Category',
+    meta: {
+      title: '分类管理',
+      icon: 'category',
+      breadcrumb: false
+    },
+    children: [{
+      path: 'base',
+      component: () => import('@/views/category/category'),
+      name: 'Category',
+      meta: {
+        title: '系统分类'
+      }
+    },
+    {
+      path: 'tag',
+      component: () => import('@/views/category/tag'),
+      name: 'Tag',
+      meta: {
+        title: '标签管理'
+      }
+    },
+    {
+      path: 'question-category',
+      component: () => import('@/views/category/question-category'),
+      name: 'QuestionCategory',
+      meta: {
+        title: '问题分类'
+      }
+    },
+    {
+      path: 'hire-category',
+      component: () => import('@/views/category/hire-category'),
+      name: 'HireCategory',
+      meta: {
+        title: '岗位分类'
+      }
+    }
+    ]
+  },
   {
     path: '/system',
     component: Layout,
@@ -215,14 +489,6 @@ export const asyncRoutes = [{
         name: 'Roles',
         meta: {
           title: '地区管理'
-        }
-      },
-      {
-        path: 'category',
-        component: () => import('@/views/system/category'),
-        name: 'Category',
-        meta: {
-          title: '分类管理'
         }
       },
       {

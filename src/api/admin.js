@@ -42,25 +42,9 @@ export function destroy(data) {
   })
 }
 
-export function getAdminPermissions(data) {
-  return request({
-    url: '/permission/cal-permissions',
-    method: 'get',
-    params: data
-  })
-}
-
 export function getDepartmentOptions() {
   return request({
     url: model + '/department-options',
     method: 'get'
   })
 }
-
-export function adminOptions() {
-  return request({
-    url: model + '/admin-options',
-    method: 'get'
-  })
-}
-

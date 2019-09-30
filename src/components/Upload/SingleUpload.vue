@@ -44,10 +44,10 @@ export default {
       hideUpload: true,
       limitCount: 1,
       unUpload: true,
-      uploadUrl: process.env.VUE_APP_UPLOAD_API
+      uploadUrl: process.env.VUE_APP_BASE_API + '/system/upload'
     }
   },
-  created(){
+  mounted(){
     this.hideUpload = this.fileUrl ? true : false
   },
   methods: {
@@ -64,7 +64,7 @@ export default {
       this.hideUpload = fileList.length >= this.limitCount
     },
     handleUpload(res) {
-      this.$emit('uploaded', res.data.file_id)
+      this.$emit('uploaded', res.data.preview_url)
     }
   }
 }

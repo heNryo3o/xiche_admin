@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: '江苏乐众管理后台',
+  title: '大学士管理后台酷炫版',
 
   /**
    * @type {boolean} true | false

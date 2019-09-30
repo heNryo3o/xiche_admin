@@ -2,32 +2,32 @@
   <div class="app-container">
     <el-row class="filter-container" :gutter="10">
       <el-col :sm="4">
-        <el-input v-model="listQuery.name" size="medium" prefix-icon="el-icon-search" placeholder="输入权限名称搜索" @keyup.enter.native="handleFilter" />
+        <el-input v-model="listQuery.name" size="small" prefix-icon="el-icon-search" placeholder="输入权限名称搜索" @keyup.enter.native="handleFilter" />
       </el-col>
       <el-col :sm="3">
-        <el-select v-model="listQuery.parent" size="medium" placeholder="父级权限" clearable>
+        <el-select v-model="listQuery.parent" size="small" placeholder="父级权限" clearable>
           <el-option v-for="item in permissionParentOptions" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
       </el-col>
       <el-col :sm="3">
-        <el-select v-model="listQuery.role_id" size="medium" clearable placeholder="归属角色">
+        <el-select v-model="listQuery.role_id" size="small" clearable placeholder="归属角色">
           <el-option v-for="item in roleOptions" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
       </el-col>
       <el-col :sm="3">
-        <el-select v-model="listQuery.status" size="medium" placeholder="权限状态" clearable>
+        <el-select v-model="listQuery.status" size="small" placeholder="权限状态" clearable>
           <el-option v-for="item in statusOptions" :key="item.key" :label="item.name" :value="item.key" />
         </el-select>
       </el-col>
       <el-col :sm="11">
-        <el-button v-waves type="primary" size="medium" icon="el-icon-search" @click="handleFilter">
+        <el-button v-waves type="primary" size="small" icon="el-icon-search" @click="handleFilter">
           搜索
         </el-button>
         <el-button
           v-waves
           v-permission="['permission/permission-list']"
           type="success"
-          size="medium"
+          size="small"
           icon="el-icon-edit"
           @click="handleCreate"
         >

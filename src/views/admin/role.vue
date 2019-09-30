@@ -4,22 +4,22 @@
       <el-col :sm="4">
         <el-input
           v-model="listQuery.name"
-          size="medium"
+          size="small"
           prefix-icon="el-icon-search"
           placeholder="输入角色名称搜索"
           @keyup.enter.native="handleFilter"
         />
       </el-col>
       <el-col :sm="3">
-        <el-select v-model="listQuery.status" size="medium" placeholder="角色状态" clearable>
+        <el-select v-model="listQuery.status" size="small" placeholder="角色状态" clearable>
           <el-option v-for="item in statusOptions" :key="item.key" :label="item.name" :value="item.key" />
         </el-select>
       </el-col>
       <el-col :sm="14">
-        <el-button v-waves type="primary" size="medium" icon="el-icon-search" @click="handleFilter">
+        <el-button v-waves type="primary" size="small" icon="el-icon-search" @click="handleFilter">
           搜索
         </el-button>
-        <el-button v-waves v-permission="['role/edit-role']" type="success" size="medium" icon="el-icon-edit" @click="handleCreate">
+        <el-button v-waves v-permission="['role/edit-role']" type="success" size="small" icon="el-icon-edit" @click="handleCreate">
           新增角色
         </el-button>
       </el-col>

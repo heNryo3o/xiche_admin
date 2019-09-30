@@ -1,0 +1,52 @@
+[{
+    "value": 1,
+    "label": "环保处理",
+    "children": [{
+        "value": 4,
+        "label": "废水处理",
+        "children": [{
+            "value": 7,
+            "label": "养殖废水"
+          },
+          {
+            "value": 8,
+            "label": "工业废水"
+          },
+          {
+            "value": 9,
+            "label": "医疗废水"
+          }
+        ]
+      },
+      {
+        "value": 5,
+        "label": "废气处理"
+      },
+      {
+        "value": 6,
+        "label": "固废土壤"
+      }
+    ]
+  },
+  {
+    "value": 2,
+    "label": "自动化",
+    "children": [{
+        "value": 10,
+        "label": "工业设备/环保设备"
+      },
+      {
+        "value": 11,
+        "label": "机械/五金工具"
+      }
+    ]
+  },
+  {
+    "value": 3,
+    "label": "检测分析",
+    "children": [{
+      "value": 12,
+      "label": "质量检测"
+    }]
+  }
+]

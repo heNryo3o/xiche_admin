@@ -4,7 +4,7 @@
       <el-col :sm="4">
         <el-input
           v-model="listQuery.name"
-          size="small"
+          size="medium"
           prefix-icon="el-icon-search"
           placeholder="输入分类名称搜索"
           clearable
@@ -12,15 +12,15 @@
         />
       </el-col>
       <el-col :sm="3">
-        <el-select v-model="listQuery.status" placeholder="状态" size="small" clearable>
+        <el-select v-model="listQuery.status" placeholder="状态" size="medium" clearable>
           <el-option v-for="item in statusOptions" :key="item.key" :label="item.name" :value="item.key" />
         </el-select>
       </el-col>
       <el-col :sm="13">
-        <el-button v-waves type="primary" icon="el-icon-search" size="small" @click="handleFilter">
+        <el-button v-waves type="primary" icon="el-icon-search" size="medium" @click="handleFilter">
           搜索
         </el-button>
-        <el-button v-waves type="success" icon="el-icon-search" size="small" @click="handleCreate">
+        <el-button v-waves type="success" icon="el-icon-search" size="medium" @click="handleCreate">
           添加分类
         </el-button>
       </el-col>
@@ -32,26 +32,25 @@
             <span>{{ row.name }}</span>
           </template>
         </el-table-column>
+
         <el-table-column label="分类等级" width="120">
           <template slot-scope="{row}">
             <span>{{ row.level }}级</span>
           </template>
         </el-table-column>
-        <el-table-column label="缩略图" width="130">
-          <template slot-scope="{row}">
-            <el-image style="width: 80px; height: 80px; border-radius: 10px;" :src="row.thumb" fit="cover" @click="handlePreview(row.thumb)" />
-          </template>
-        </el-table-column>
+
         <el-table-column label="编辑者" width="180">
           <template slot-scope="{row}">
             <span>{{ row.admin_name }}</span>
           </template>
         </el-table-column>
+
         <el-table-column label="添加时间" width="180">
           <template slot-scope="{row}">
             <span>{{ row.created_at }}</span>
           </template>
         </el-table-column>
+
         <el-table-column label="状态" width="120">
           <template slot-scope="{row}">
             <el-tag :type="row.status == 1 ? '' : 'danger'" size="small"><span>{{ row.status == 1 ? '使用中' : '已禁用' }}</span></el-tag>
@@ -90,23 +89,10 @@
         <el-form-item label="分类名称">
           <el-input v-model="temp.name" placeholder="请填写分类名称" />
         </el-form-item>
-        <el-form-item label="缩略图">
-          <el-upload
-            class="avatar-uploader"
-            v-model="temp.thumb"
-            :action="uploadUrl"
-            :headers="uploadHeaders"
-            :show-file-list="false"
-            :on-success="handleUploadSuccess"
-            :before-upload="beforeUpload"
-          >
-            <img v-if="temp.thumb" :src="temp.thumb" class="avatar">
-            <i v-else class="el-icon-plus avatar-uploader-icon" />
-          </el-upload>
-        </el-form-item>
+
         <el-form-item label="父级分类">
           <div class="block">
-            <el-cascader v-model="temp.parent_id" :options="parentOptions" :props="{ checkStrictly: true }" clearable />
+            <el-cascader v-model="temp.parent_id" :options="categoryOptions" :props="{ checkStrictly: true }" clearable />
           </div>
         </el-form-item>
 
@@ -128,11 +114,7 @@
         </el-button>
       </div>
     </el-dialog>
-    
-    <el-dialog :visible.sync="previewVisible">
-      <img height="400px" style="margin: auto;" :src="previewImageUrl" fit="contain">
-    </el-dialog>
-    
+
   </div>
 </template>
 
@@ -142,8 +124,8 @@ import {
   edit,
   create,
   changeStatus,
-  getParentOptions
-} from '@/api/category'
+  getOptions
+} from '@/api/hire-category'
 import waves from '@/directive/waves' // waves directive
 import permission from '@/directive/permission'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
@@ -196,7 +178,7 @@ export default {
         name: '已禁用',
         key: 2
       }],
-      parentOptions: [],
+      categoryOptions: [],
       temp: {},
       dialogFormVisible: false,
       dialogStatus: '',
@@ -218,13 +200,13 @@ export default {
   },
   created() {
     this.getList()
-    this.getParentOptions()
+    this.getOptions()
   },
 
   methods: {
-    getParentOptions() {
-      getParentOptions().then(response => {
-        this.parentOptions = response.data.options
+    getOptions() {
+      getOptions().then(response => {
+        this.categoryOptions = response.data.options
       })
     },
     getList() {
@@ -287,8 +269,8 @@ export default {
           if (this.temp.id > 0) {
             edit(this.temp).then(response => {
               this.getList()
-              this.getParentOptions()
               this.dialogFormVisible = false
+              this.getOptions()
               this.$notify({
                 title: '成功',
                 message: '修改分类信息成功',
@@ -299,8 +281,8 @@ export default {
           } else {
             create(this.temp).then(response => {
               this.getList()
-              this.getParentOptions()
               this.dialogFormVisible = false
+              this.getOptions()
               this.$notify({
                 title: '成功',
                 message: '新建分类成功',
@@ -330,31 +312,5 @@ export default {
 </script>
 
 <style lang="scss">
-.avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
-  }
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
-  }
-  .avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
-  }
 
-  .el-form-item__content{
-    text-align: left;
-  }
 </style>

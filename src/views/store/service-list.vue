@@ -11,19 +11,19 @@
           @keyup.enter.native="handleFilter"
         />
       </el-col>
+      <el-col :sm="4">
+        <el-input
+          v-model="listQuery.name"
+          size="small"
+          prefix-icon="el-icon-search"
+          placeholder="输入服务名称搜索"
+          clearable
+          @keyup.enter.native="handleFilter"
+        />
+      </el-col>
       <el-col :sm="3">
-        <el-select v-model="listQuery.status" placeholder="用户状态" size="small" clearable>
+        <el-select v-model="listQuery.status" placeholder="服务状态" size="small" clearable>
           <el-option v-for="item in statusOptions" :key="item.key" :label="item.name" :value="item.key" />
-        </el-select>
-      </el-col>
-      <el-col :sm="3">
-        <el-select v-model="listQuery.prefer" placeholder="用户类型" size="small" clearable>
-          <el-option v-for="item in preferOptions" :key="item.key" :label="item.name" :value="item.key" />
-        </el-select>
-      </el-col>
-      <el-col :sm="3">
-        <el-select v-model="listQuery.vip_level" placeholder="会员等级" size="small" clearable>
-          <el-option v-for="item in vipOptions" :key="item.key" :label="item.name" :value="item.key" />
         </el-select>
       </el-col>
       <el-col :sm="6">
@@ -34,8 +34,8 @@
           size="small"
           unlink-panels
           range-separator="-"
-          start-placeholder="注册开始日期"
-          end-placeholder="注册结束日期"
+          start-placeholder="创建开始日期"
+          end-placeholder="创建结束日期"
           :picker-options="pickerOptions"
           value-format="yyyy-MM-dd"
           format="yyyy年 MM月 dd日"
@@ -47,51 +47,45 @@
           搜索
         </el-button>
         <el-button v-waves v-permission="['role/edit-role']" type="success" size="small" icon="el-icon-edit" @click="handleCreate">
-          创建用户
+          创建服务
         </el-button>
       </el-col>
     </el-row>
     <div class="table-container">
       <el-table v-loading="listLoading" :data="list" border fit highlight-current-row size="mini" style="font-size: 14px;">
-        <el-table-column label="手机号码" width="150">
+        <el-table-column label="用户账号" width="150">
           <template slot-scope="{row}">
             <span class="link-type" @click="handleView(row.id)">{{ row.mobile }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column label="姓名" width="150">
+        <el-table-column label="服务名称" width="150">
           <template slot-scope="{row}">
-            <span>{{ row.nickname }}</span>
+            <span>{{ row.name }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column label="用户类型" width="150">
+        <el-table-column label="所属店铺" width="150">
           <template slot-scope="{row}">
-            <span>{{ row.prefer_name }}</span>
+            <span>{{ row.store_name }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column label="会员等级" width="150">
+        <el-table-column label="分类" width="150">
           <template slot-scope="{row}">
-            <span>{{ row.vip_name }}</span>
+            <span>{{ row.category_name }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column label="渠道来源" width="180">
-          <template slot-scope="{row}">
-            <span>{{ row.canel }}</span>
-          </template>
-        </el-table-column>
-
-        <el-table-column label="注册时间" width="180">
+        <el-table-column label="创建时间" width="180">
           <template slot-scope="{row}">
             <span>{{ row.created_at }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column label="用户状态" width="120">
+        <el-table-column label="服务状态" width="120">
           <template slot-scope="{row}">
-            <el-tag :type="row.status == 1 ? '' : 'danger'" size="small"><span>{{ row.status == 1 ? '正常' : '禁止登录' }}</span></el-tag>
+            <el-tag :type="row.status == 1 ? '' : 'danger'" size="small"><span>{{ row.status == 1 ? '展示中' : '下架' }}</span></el-tag>
           </template>
         </el-table-column>
 
@@ -108,10 +102,10 @@
               type="warning"
               @click="handleChangeStatus(row,2)"
             >
-              禁用
+              下架
             </el-button>
             <el-button v-else v-waves v-permission="['role/change-status']" size="mini" type="success" @click="handleChangeStatus(row,1)">
-              启用
+              上架
             </el-button>
           </template>
         </el-table-column>
@@ -169,9 +163,8 @@
 import {
   getList,
   changeStatus,
-  edit,
-  create
-} from '@/api/product'
+  edit
+} from '@/api/service'
 import waves from '@/directive/waves' // waves directive
 import permission from '@/directive/permission'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
@@ -216,43 +209,12 @@ export default {
         }]
       },
       statusOptions: [{
-        name: '正常',
+        name: '展示中',
         key: 1
       },
       {
-        name: '禁止登录',
+        name: '下架',
         key: 2
-      }
-      ],
-      vipOptions: [{
-        name: '普通用户',
-        key: 0
-      },
-      {
-        name: '基础店',
-        key: 1
-      }, {
-        name: '黄金店',
-        key: 2
-      }, {
-        name: '钻石店',
-        key: 3
-      }, {
-        name: '皇冠店',
-        key: 4
-      }
-      ],
-      preferOptions: [{
-        name: '解决方',
-        key: 1
-      },
-      {
-        name: '需求方',
-        key: 2
-      },
-      {
-        name: '未确认',
-        key: 3
       }
       ],
       dialogFormVisible: false,
@@ -364,7 +326,7 @@ export default {
     },
 
     handleChangeStatus(row, status) {
-      var message = status === 1 ? '用户启用成功' : '用户禁用成功'
+      var message = status === 1 ? '服务上架成功' : '服务下架成功'
       changeStatus({
         id: row.id,
         status: status

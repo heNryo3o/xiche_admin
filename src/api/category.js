@@ -34,9 +34,9 @@ export function changeStatus(data) {
   })
 }
 
-export function getParentOptions(data) {
+export function getOptions(data) {
   return request({
-    url: model+'/parent-options',
+    url: model+'/options',
     method: 'get',
   })
 }
