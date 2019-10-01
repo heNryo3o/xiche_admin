@@ -41,10 +41,3 @@ export function destroy(data) {
     data
   })
 }
-
-export function getDepartmentOptions() {
-  return request({
-    url: model + '/department-options',
-    method: 'get'
-  })
-}

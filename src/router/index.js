@@ -111,14 +111,6 @@ export const asyncRoutes = [{
         meta: {
           title: '订单列表'
         }
-      },
-      {
-        path: 'order-holding',
-        component: () => import('@/views/order/order-holding'),
-        name: 'OrderHolding',
-        meta: {
-          title: '待接单订单'
-        }
       }
     ]
   },
