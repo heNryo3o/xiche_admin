@@ -50,6 +50,22 @@ export function getInfo(data) {
   })
 }
 
+export function getWorkers(data) {
+  return request({
+    url: model + '/workers',
+    method: 'get',
+    params: data
+  })
+}
+
+export function dispatchOrder(data) {
+  return request({
+    url: model + '/dispatch',
+    method: 'post',
+    data
+  })
+}
+
 export function getLogs(data) {
   return request({
     url: model + '/logs',

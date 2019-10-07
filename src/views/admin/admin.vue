@@ -35,7 +35,7 @@
         <el-button v-waves type="primary" size="medium" icon="el-icon-search" @click="handleFilter">
           搜索
         </el-button>
-        <el-button v-waves v-permission="['admin/edit-admin']" size="medium" type="success" icon="el-icon-edit" @click="handleCreate">
+        <el-button v-waves v-permission="['admin/create']" size="medium" type="success" icon="el-icon-edit" @click="handleCreate">
           新增管理员
         </el-button>
       </el-col>
@@ -84,7 +84,7 @@
         </el-table-column>
         <el-table-column label="操作" fixed="right" min-width="200" class-name="small-padding fixed-width">
           <template slot-scope="{row}">
-            <el-button v-waves v-permission="['admin/edit-admin']" type="primary" size="mini" @click="handleUpdate(row)">
+            <el-button v-waves v-permission="['admin/edit']" type="primary" size="mini" @click="handleUpdate(row)">
               编辑
             </el-button>
 

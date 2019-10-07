@@ -65,6 +65,8 @@
             <el-tag v-if="row.status == 2" size="small">已接单</el-tag>
             <el-tag v-if="row.status == 3" size="small">开始洗车</el-tag>
             <el-tag v-if="row.status == 4" size="small" type="success">已完成</el-tag>
+             <el-tag v-if="row.status == 5" size="small" type="success">已评价</el-tag>
+              <el-tag v-if="row.status == 6" size="small" type="info">已取消</el-tag>
           </template>
         </el-table-column>
 

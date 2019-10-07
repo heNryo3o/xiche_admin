@@ -11,29 +11,20 @@
             <el-form-item label="小型轿车普通洗车">
               <el-input v-model="form.customer_1_1"></el-input>
             </el-form-item>
-            <el-form-item label="SUV普通洗车">
+            <el-form-item label="MPV普通洗车">
               <el-input v-model="form.customer_2_1"></el-input>
             </el-form-item>
-            <el-form-item label="MPV普通洗车">
+            <el-form-item label="小型轿车内外洗">
               <el-input v-model="form.customer_3_1"></el-input>
             </el-form-item>
-            <el-form-item label="小型轿车内外洗">
+            <el-form-item label="MPV内外洗">
               <el-input v-model="form.customer_1_2"></el-input>
             </el-form-item>
-            <el-form-item label="SUV内外洗">
+            <el-form-item label="小型轿车镀膜">
               <el-input v-model="form.customer_2_2"></el-input>
             </el-form-item>
-            <el-form-item label="MPV内外洗">
-              <el-input v-model="form.customer_3_2"></el-input>
-            </el-form-item>
-            <el-form-item label="小型轿车镀膜">
-              <el-input v-model="form.customer_1_3"></el-input>
-            </el-form-item>
-            <el-form-item label="SUV镀膜">
-              <el-input v-model="form.customer_2_3"></el-input>
-            </el-form-item>
             <el-form-item label="MPV镀膜">
-              <el-input v-model="form.customer_3_3"></el-input>
+              <el-input v-model="form.customer_3_2"></el-input>
             </el-form-item>
           </el-card>
         </el-col>
@@ -45,29 +36,20 @@
             <el-form-item label="小型轿车普通洗车">
               <el-input v-model="form.worker_1_1"></el-input>
             </el-form-item>
-            <el-form-item label="SUV普通洗车">
+            <el-form-item label="MPV普通洗车">
               <el-input v-model="form.worker_2_1"></el-input>
             </el-form-item>
-            <el-form-item label="MPV普通洗车">
+            <el-form-item label="小型轿车内外洗">
               <el-input v-model="form.worker_3_1"></el-input>
             </el-form-item>
-            <el-form-item label="小型轿车内外洗">
+            <el-form-item label="MPV内外洗">
               <el-input v-model="form.worker_1_2"></el-input>
             </el-form-item>
-            <el-form-item label="SUV内外洗">
+            <el-form-item label="小型轿车镀膜">
               <el-input v-model="form.worker_2_2"></el-input>
             </el-form-item>
-            <el-form-item label="MPV内外洗">
-              <el-input v-model="form.worker_3_2"></el-input>
-            </el-form-item>
-            <el-form-item label="小型轿车镀膜">
-              <el-input v-model="form.worker_1_3"></el-input>
-            </el-form-item>
-            <el-form-item label="SUV镀膜">
-              <el-input v-model="form.worker_2_3"></el-input>
-            </el-form-item>
             <el-form-item label="MPV镀膜">
-              <el-input v-model="form.worker_3_3"></el-input>
+              <el-input v-model="form.worker_3_2"></el-input>
             </el-form-item>
           </el-card>
         </el-col>

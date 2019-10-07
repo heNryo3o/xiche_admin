@@ -25,7 +25,7 @@
         </el-button>
         <el-button
           v-waves
-          v-permission="['permission/permission-list']"
+          v-permission="['permission/create']"
           type="success"
           size="small"
           icon="el-icon-edit"
@@ -82,7 +82,7 @@
 
         <el-table-column label="操作" align="center" min-width="300" fixed="right" class-name="small-padding fixed-width">
           <template slot-scope="{row}">
-            <el-button v-waves v-permission="['permission/edit-permission']" type="primary" size="mini" @click="handleUpdate(row)">
+            <el-button v-waves v-permission="['permission/edit']" type="primary" size="mini" @click="handleUpdate(row)">
               编辑
             </el-button>
             <el-button
@@ -98,7 +98,7 @@
             <el-button v-else v-waves v-permission="['permission/change-status']" size="mini" type="success" @click="handleChangeStatus(row,1)">
               启用
             </el-button>
-            <el-button v-waves v-permission="['permission/delete-permission']" size="mini" type="danger" @click="handleDelete(row)">
+            <el-button v-waves v-permission="['permission/delete']" size="mini" type="danger" @click="handleDelete(row)">
               删除
             </el-button>
           </template>

@@ -75,13 +75,15 @@ export const asyncRoutes = [{
     meta: {
       title: '平台用户',
       icon: 'user',
-      breadcrumb: false
+      breadcrumb: false,
+      roles: ['user/workers','user/index'],
     },
     children: [{
         path: 'user-list',
         component: () => import('@/views/user/user-list'),
         name: 'UserList',
         meta: {
+          roles: ['user/index'],
           title: '用户列表'
         }
       },
@@ -90,6 +92,7 @@ export const asyncRoutes = [{
         component: () => import('@/views/user/worker-join'),
         name: 'UserLog',
         meta: {
+          roles: ['user/workers'],
           title: '洗车工审核'
         }
       }
@@ -102,13 +105,15 @@ export const asyncRoutes = [{
     meta: {
       title: '订单管理',
       icon: 'order',
-      breadcrumb: false
+      breadcrumb: false,
+      roles: ['order/index']
     },
     children: [{
         path: 'order-list',
         component: () => import('@/views/order/order-list'),
         name: 'OrderList',
         meta: {
+          roles: ['order/index'],
           title: '订单列表'
         }
       }
@@ -121,13 +126,15 @@ export const asyncRoutes = [{
     meta: {
       title: '财务管理',
       icon: 'account',
-      breadcrumb: false
+      breadcrumb: false,
+      roles: ['account/worker-deposit','account/worker-withdraw','account/user-deposit','account/success-order']
     },
     children: [{
         path: 'worker-deposit',
         component: () => import('@/views/account/worker-deposit'),
         name: 'WorkerDeposit',
         meta: {
+          roles: ['account/worker-deposit'],
           title: '洗车工押金流水'
         }
       },
@@ -136,6 +143,7 @@ export const asyncRoutes = [{
         component: () => import('@/views/account/worker-withdraw'),
         name: 'WorkerWithdraw',
         meta: {
+          roles: ['account/worker-withdraw'],
           title: '洗车工提现审核'
         }
       },
@@ -144,6 +152,7 @@ export const asyncRoutes = [{
         component: () => import('@/views/account/user-deposit'),
         name: 'UserDeposit',
         meta: {
+          roles: ['account/user-deposit'],
           title: '用户预存流水'
         }
       },
@@ -152,6 +161,7 @@ export const asyncRoutes = [{
         component: () => import('@/views/account/success-order'),
         name: 'SuccessOrder',
         meta: {
+          roles: ['account/success-order'],
           title: '成交订单流水'
         }
       }
@@ -210,6 +220,7 @@ export const asyncRoutes = [{
         component: () => import('@/views/system/price'),
         name: 'Price',
         meta: {
+          roles: ['price'],
           title: '价格设定'
         }
       }
