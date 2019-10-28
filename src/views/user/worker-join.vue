@@ -144,9 +144,9 @@
     <el-dialog title="查看认证信息" width="900px" :visible.sync="dialogVisible">
       <div class="preview-container">
         <div class="idcard-pic">
-          <el-image :src="temp.card_pic" fit="contain"/>
-          <el-image :src="temp.card_pic_back" fit="contain"/>
-          <el-image :src="temp.card_pic_hand" fit="contain"/>
+          <el-image :src="temp.card_pic" fit="contain" style="display: inline-block;width: 31%;"/>
+          <el-image :src="temp.card_pic_back" fit="contain" style="display: inline-block;width: 31%;"/>
+          <el-image :src="temp.card_pic_hand" fit="contain" style="display: inline-block;width: 31%;"/>
         </div>
         <p>
           姓名: {{ temp.true_name }}
