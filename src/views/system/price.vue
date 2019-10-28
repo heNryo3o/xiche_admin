@@ -1,12 +1,72 @@
 <template>
   <div>
     <el-row :gutter="20" style="text-align: center;width: 90%;margin: auto;padding-top: 30px;">
-      <el-form ref="form" :model="form" size="small" label-width="150px">
+      <el-form ref="form" :model="form" size="small" label-width="200px">
         <el-col :span="12">
-
           <el-card shadow="hover">
             <div slot="header" class="clearfix">
-              <span>客户价格</span>
+              <span>基础设置</span>
+            </div>
+            <el-form-item label="洗车工收益比例">
+              <el-input v-model="form.rate" placeholder="请输入洗车工收益百分比"></el-input>
+            </el-form-item>
+            <el-form-item label="异常订单洗车工收益">
+              <el-input v-model="form.refund_rate" placeholder="请输入异常订单时洗车工收益百分比"></el-input>
+            </el-form-item>
+            <el-form-item label="营业开始时间">
+              <el-time-select placeholder="起始时间" v-model="form.start_time" :picker-options="{
+                  start: '00:00',
+                  step: '00:30',
+                  end: '24:00'
+                }">
+              </el-time-select>
+              </el-time-select>
+            </el-form-item>
+            <el-form-item label="营业结束时间">
+              <el-time-select placeholder="结束时间" v-model="form.end_time" :picker-options="{
+                  start: '00:00',
+                  step: '00:30',
+                  end: '24:00',
+                  minTime: form.start_time
+                }">
+              </el-time-select>
+            </el-form-item>
+          </el-card>
+          <el-card shadow="hover" style="margin-top: 20px;">
+            <div slot="header" class="clearfix">
+              <span>充值设置</span>
+            </div>
+            <el-row>
+              <div style="margin-top: 20px;margin-bottom: 20px;">
+                <el-card class="box-card" shadow="hover">
+                  <div slot="header" class="clearfix" style="text-align: left;">
+                    <el-button v-waves size="mini" type="success" @click="handleAddSku">
+                      添加新档位
+                    </el-button>
+                  </div>
+                  <div v-for="(item,index) in form.deposits" :key="index">
+                    <div style="margin-bottom: 10px;text-align: left;">
+                      <span style="font-size: 17px;font-weight: 600;">档位{{index+1}}</span>
+                      <el-button v-waves size="mini" type="danger" style="margin-left: 20px;" @click="handleDelSku(index)">
+                        删除档位
+                      </el-button>
+                    </div>
+                    <el-form-item label="充值金额：" label-width="100px">
+                      <el-input v-model="item.deposit_money" placeholder="请填写充值金额" style="width: 300px;" />
+                    </el-form-item>
+                    <el-form-item label="赠送金额：" label-width="100px">
+                      <el-input v-model="item.give_money" placeholder="请填写赠送金额" style="width: 300px;" />
+                    </el-form-item>
+                  </div>
+                </el-card>
+              </div>
+            </el-row>
+          </el-card>
+        </el-col>
+        <el-col :span="12">
+          <el-card shadow="hover">
+            <div slot="header" class="clearfix">
+              <span>洗车价格</span>
             </div>
             <el-form-item label="小型轿车普通洗车">
               <el-input v-model="form.customer_1_1"></el-input>
@@ -25,31 +85,6 @@
             </el-form-item>
             <el-form-item label="MPV镀膜">
               <el-input v-model="form.customer_3_2"></el-input>
-            </el-form-item>
-          </el-card>
-        </el-col>
-        <el-col :span="12">
-          <el-card shadow="hover">
-            <div slot="header" class="clearfix">
-              <span>洗车工收益</span>
-            </div>
-            <el-form-item label="小型轿车普通洗车">
-              <el-input v-model="form.worker_1_1"></el-input>
-            </el-form-item>
-            <el-form-item label="MPV普通洗车">
-              <el-input v-model="form.worker_2_1"></el-input>
-            </el-form-item>
-            <el-form-item label="小型轿车内外洗">
-              <el-input v-model="form.worker_3_1"></el-input>
-            </el-form-item>
-            <el-form-item label="MPV内外洗">
-              <el-input v-model="form.worker_1_2"></el-input>
-            </el-form-item>
-            <el-form-item label="小型轿车镀膜">
-              <el-input v-model="form.worker_2_2"></el-input>
-            </el-form-item>
-            <el-form-item label="MPV镀膜">
-              <el-input v-model="form.worker_3_2"></el-input>
             </el-form-item>
           </el-card>
         </el-col>
@@ -75,13 +110,24 @@
     },
     data() {
       return {
-        form: {}
+        form: {
+          deposits: []
+        }
       }
     },
     created() {
       this.getInfo()
     },
     methods: {
+      handleDelSku(index) {
+        this.form.deposits.splice(index, 1)
+      },
+      handleAddSku() {
+        this.form.deposits.push({
+          deposit_money: '',
+          give_money: ''
+        })
+      },
       getInfo() {
         getInfo(this.listQuery).then(response => {
           this.form = response.data

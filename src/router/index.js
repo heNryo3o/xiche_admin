@@ -221,7 +221,7 @@ export const asyncRoutes = [{
         name: 'Price',
         meta: {
           roles: ['price'],
-          title: '价格设定'
+          title: '系统设置'
         }
       }
     ]
