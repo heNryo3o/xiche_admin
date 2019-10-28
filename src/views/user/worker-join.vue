@@ -312,8 +312,6 @@
 
 <style lang="scss">
   .idcard-pic {
-    height: 400px;
-    width: 350px;
-    margin: auto;
+    width: 100%;
   }
 </style>

@@ -13,6 +13,12 @@
             <el-form-item label="异常订单洗车工收益">
               <el-input v-model="form.refund_rate" placeholder="请输入异常订单时洗车工收益百分比"></el-input>
             </el-form-item>
+            <el-form-item label="可匹配订单距离范围(公里)">
+              <el-input v-model="form.distance" placeholder="请输入可匹配订单距离范围(公里)"></el-input>
+            </el-form-item>
+            <el-form-item label="客服电话号码">
+              <el-input v-model="form.phone" placeholder="请输入客服电话号码"></el-input>
+            </el-form-item>
             <el-form-item label="营业开始时间">
               <el-time-select placeholder="起始时间" v-model="form.start_time" :picker-options="{
                   start: '00:00',

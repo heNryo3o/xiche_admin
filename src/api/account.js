@@ -41,3 +41,19 @@ export function withdrawAudit(data) {
     data
   })
 }
+
+export function couponIndex(data) {
+  return request({
+    url: model + '/coupon-index',
+    method: 'get',
+    params: data
+  })
+}
+
+export function couponCreate(data) {
+  return request({
+    url: model + '/coupon-create',
+    method: 'post',
+    data
+  })
+}

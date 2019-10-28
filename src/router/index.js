@@ -130,6 +130,15 @@ export const asyncRoutes = [{
       roles: ['account/worker-deposit','account/worker-withdraw','account/user-deposit','account/success-order']
     },
     children: [{
+        path: 'coupon',
+        component: () => import('@/views/account/coupon'),
+        name: 'Coupon',
+        meta: {
+          roles: ['account/coupon'],
+          title: '优惠券'
+        }
+      },
+      {
         path: 'worker-deposit',
         component: () => import('@/views/account/worker-deposit'),
         name: 'WorkerDeposit',
