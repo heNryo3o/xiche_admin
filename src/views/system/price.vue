@@ -16,6 +16,9 @@
             <el-form-item label="可匹配订单距离范围(公里)">
               <el-input v-model="form.distance" placeholder="请输入可匹配订单距离范围(公里)"></el-input>
             </el-form-item>
+            <el-form-item label="新用户优惠券金额">
+              <el-input v-model="form.new_coupon" placeholder="请输入新用户优惠券金额"></el-input>
+            </el-form-item>
             <el-form-item label="客服电话号码">
               <el-input v-model="form.phone" placeholder="请输入客服电话号码"></el-input>
             </el-form-item>
@@ -78,19 +81,19 @@
               <el-input v-model="form.customer_1_1"></el-input>
             </el-form-item>
             <el-form-item label="MPV普通洗车">
-              <el-input v-model="form.customer_2_1"></el-input>
+              <el-input v-model="form.customer_1_3"></el-input>
             </el-form-item>
             <el-form-item label="小型轿车内外洗">
-              <el-input v-model="form.customer_3_1"></el-input>
+              <el-input v-model="form.customer_2_1"></el-input>
             </el-form-item>
             <el-form-item label="MPV内外洗">
-              <el-input v-model="form.customer_1_2"></el-input>
+              <el-input v-model="form.customer_2_3"></el-input>
             </el-form-item>
             <el-form-item label="小型轿车镀膜">
-              <el-input v-model="form.customer_2_2"></el-input>
+              <el-input v-model="form.customer_3_1"></el-input>
             </el-form-item>
             <el-form-item label="MPV镀膜">
-              <el-input v-model="form.customer_3_2"></el-input>
+              <el-input v-model="form.customer_3_3"></el-input>
             </el-form-item>
           </el-card>
         </el-col>
