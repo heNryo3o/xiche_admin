@@ -57,3 +57,11 @@ export function couponCreate(data) {
     data
   })
 }
+
+export function couponDestroy(data) {
+  return request({
+    url: model + '/coupon-destroy',
+    method: 'post',
+    data
+  })
+}

@@ -28,6 +28,13 @@
             <span>{{ row.created_at }}</span>
           </template>
         </el-table-column>
+        <el-table-column label="操作" width="200">
+          <template slot-scope="{row}">
+            <el-button v-waves size="mini" type="danger" @click="destroy(row.id)">
+              删除
+            </el-button>
+          </template>
+        </el-table-column>
 
       </el-table>
     </div>
@@ -40,7 +47,8 @@
 <script>
   import {
     couponIndex,
-    couponCreate
+    couponCreate,
+    couponDestroy
   } from '@/api/account'
   import waves from '@/directive/waves' // waves directive
   import permission from '@/directive/permission'
@@ -109,7 +117,19 @@
     },
 
     methods: {
-
+      destroy(id) {
+        couponDestroy({
+          id: id
+        }).then(response => {
+            this.$notify({
+              title: '成功',
+              message: '删除优惠券成功',
+              type: 'success',
+              duration: 2000
+            })
+            this.getList()
+        })
+      },
       getList() {
         this.listLoading = true
         couponIndex(this.listQuery).then(response => {
