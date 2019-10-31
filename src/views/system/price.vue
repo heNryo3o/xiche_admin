@@ -27,8 +27,8 @@
                   start: '00:00',
                   step: '00:30',
                   end: '24:00'
-                }">
-              </el-time-select>
+                }"
+                style="width: 280px;">
               </el-time-select>
             </el-form-item>
             <el-form-item label="营业结束时间">
@@ -37,8 +37,17 @@
                   step: '00:30',
                   end: '24:00',
                   minTime: form.start_time
-                }">
+                }"
+                style="width: 280px;">
               </el-time-select>
+            </el-form-item>
+            <el-form-item label="服务范围">
+              <el-cascader
+              style="width: 280px;"
+              v-model="form.chosen_areas"
+                  :options="areaOptions"
+                  :props="{ multiple: true }"
+                  clearable></el-cascader>
             </el-form-item>
           </el-card>
           <el-card shadow="hover" style="margin-top: 20px;">
@@ -106,6 +115,7 @@
 </template>
 
 <script>
+    import areaOptions from '@/assets/area.json'
   import {
     getInfo,
     edit
@@ -121,7 +131,8 @@
       return {
         form: {
           deposits: []
-        }
+        },
+        areaOptions: areaOptions
       }
     },
     created() {
@@ -146,7 +157,7 @@
         edit(this.form).then(reponse => {
           this.$notify({
             title: '成功',
-            message: '修改定价成功',
+            message: '修改系统设置成功',
             type: 'success',
             duration: 2000
           })
