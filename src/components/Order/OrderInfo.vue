@@ -61,6 +61,135 @@
               </div>
             </el-row>
           </el-card>
+          <el-card class="box-card mb-30" shadow="hover" v-if="info.detail.before_qianbaoxian">
+            <div slot="header" class="clearfix">
+              <span style="font-weight: bold;">洗车前照片</span>
+            </div>
+            <el-row :gutter="10" class="mb-20">
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.before_qianbaoxian" :src="info.detail.before_qianbaoxian"
+                  fit="contain">
+                </el-image>
+              </el-col>
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.before_zuoqian" :src="info.detail.before_zuoqian" fit="contain">
+                </el-image>
+              </el-col>
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.before_youqian" :src="info.detail.before_youqian" fit="contain">
+                </el-image>
+              </el-col>
+            </el-row>
+            <el-row :gutter="10" class="mb-20">
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.before_zuohou" :src="info.detail.before_zuohou" fit="contain">
+                </el-image>
+              </el-col>
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.before_youhou" :src="info.detail.before_youhou" fit="contain">
+                </el-image>
+              </el-col>
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.before_zuoce" :src="info.detail.before_zuoce" fit="contain">
+                </el-image>
+              </el-col>
+            </el-row>
+            <el-row :gutter="10" class="mb-20">
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.before_youce" :src="info.detail.before_youce" fit="contain">
+                </el-image>
+              </el-col>
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.before_houbaoxian" :src="info.detail.before_houbaoxian"
+                  fit="contain">
+                </el-image>
+              </el-col>
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.before_qianpai" :src="info.detail.before_qianpai" fit="contain">
+                </el-image>
+              </el-col>
+            </el-row>
+            <el-row :gutter="10" class="mb-20">
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.before_houpai" :src="info.detail.before_houpai" fit="contain">
+                </el-image>
+              </el-col>
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.before_zhongkong" :src="info.detail.before_zhongkong"
+                  fit="contain">
+                </el-image>
+              </el-col>
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.before_houbei" :src="info.detail.before_houbei" fit="contain">
+                </el-image>
+              </el-col>
+            </el-row>
+          </el-card>
+
+          <el-card class="box-card mb-30" shadow="hover" v-if="info.detail.after_qianbaoxian">
+            <div slot="header" class="clearfix">
+              <span style="font-weight: bold;">洗车前照片</span>
+            </div>
+            <el-row :gutter="10" class="mb-20">
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.after_qianbaoxian" :src="info.detail.after_qianbaoxian"
+                  fit="contain">
+                </el-image>
+              </el-col>
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.after_zuoqian" :src="info.detail.after_zuoqian" fit="contain">
+                </el-image>
+              </el-col>
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.after_youqian" :src="info.detail.after_youqian" fit="contain">
+                </el-image>
+              </el-col>
+            </el-row>
+            <el-row :gutter="10" class="mb-20">
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.after_zuohou" :src="info.detail.after_zuohou" fit="contain">
+                </el-image>
+              </el-col>
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.after_youhou" :src="info.detail.after_youhou" fit="contain">
+                </el-image>
+              </el-col>
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.after_zuoce" :src="info.detail.after_zuoce" fit="contain">
+                </el-image>
+              </el-col>
+            </el-row>
+            <el-row :gutter="10" class="mb-20">
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.after_youce" :src="info.detail.after_youce" fit="contain">
+                </el-image>
+              </el-col>
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.after_houbaoxian" :src="info.detail.after_houbaoxian"
+                  fit="contain">
+                </el-image>
+              </el-col>
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.after_qianpai" :src="info.detail.after_qianpai" fit="contain">
+                </el-image>
+              </el-col>
+            </el-row>
+            <el-row :gutter="10" class="mb-20">
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.after_houpai" :src="info.detail.after_houpai" fit="contain">
+                </el-image>
+              </el-col>
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.after_zhongkong" :src="info.detail.after_zhongkong"
+                  fit="contain">
+                </el-image>
+              </el-col>
+              <el-col :sm="8">
+                <el-image style="width: 100%;" v-if="info.detail.after_houbei" :src="info.detail.after_houbei" fit="contain">
+                </el-image>
+              </el-col>
+            </el-row>
+          </el-card>
         </div>
       </el-card>
     </el-drawer>
@@ -80,7 +209,9 @@
     ],
     data() {
       return {
-        info: {},
+        info: {
+          detail: {}
+        },
         list: []
       }
     },
@@ -160,7 +291,7 @@
     overflow-y: scroll;
   }
 
-  .info-col{
+  .info-col {
     margin-bottom: 20px;
   }
 </style>
