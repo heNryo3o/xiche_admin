@@ -19,9 +19,12 @@
           range-separator="-" start-placeholder="发起订单开始日期" end-placeholder="发起订单结束日期" :picker-options="pickerOptions"
           value-format="yyyy-MM-dd" format="yyyy年 MM月 dd日" style="width: 100%;" />
       </el-col>
-      <el-col :sm="2">
+      <el-col :sm="6">
         <el-button v-waves type="primary" icon="el-icon-search" size="medium" @click="handleFilter">
           搜索
+        </el-button>
+        <el-button v-waves type="success" size="medium" @click="handleExport">
+          导出
         </el-button>
       </el-col>
     </el-row>
@@ -65,8 +68,8 @@
             <el-tag v-if="row.status == 2" size="small">已接单</el-tag>
             <el-tag v-if="row.status == 3" size="small">开始洗车</el-tag>
             <el-tag v-if="row.status == 4" size="small" type="success">已完成</el-tag>
-             <el-tag v-if="row.status == 5" size="small" type="success">已评价</el-tag>
-              <el-tag v-if="row.status == 6" size="small" type="info">已取消</el-tag>
+            <el-tag v-if="row.status == 5" size="small" type="success">已评价</el-tag>
+            <el-tag v-if="row.status == 6" size="small" type="info">已取消</el-tag>
           </template>
         </el-table-column>
 
@@ -114,7 +117,8 @@
 
 <script>
   import {
-    getList
+    getList,
+    exportList
   } from '@/api/order'
   import waves from '@/directive/waves' // waves directive
   import permission from '@/directive/permission'
@@ -197,7 +201,12 @@
     },
 
     methods: {
-
+      handleExport() {
+        exportList(this.listQuery).then(response => {
+          window.location.href = response.data.url
+          // console.log(response.data.url)
+        })
+      },
       getList() {
         this.listLoading = true
         getList(this.listQuery).then(response => {

@@ -10,6 +10,14 @@ export function getList(data) {
   })
 }
 
+export function exportList(data) {
+  return request({
+    url: model + '/export',
+    method: 'get',
+    params: data
+  })
+}
+
 export function edit(data) {
   return request({
     url: model + '/edit',

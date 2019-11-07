@@ -89,19 +89,19 @@
             <el-form-item label="小型轿车普通洗车">
               <el-input v-model="form.customer_1_1"></el-input>
             </el-form-item>
-            <el-form-item label="MPV普通洗车">
+            <el-form-item label="SUV/MPV普通洗车">
               <el-input v-model="form.customer_1_2"></el-input>
             </el-form-item>
             <el-form-item label="小型轿车内外洗">
               <el-input v-model="form.customer_2_1"></el-input>
             </el-form-item>
-            <el-form-item label="MPV内外洗">
+            <el-form-item label="SUV/MPV内外洗">
               <el-input v-model="form.customer_2_2"></el-input>
             </el-form-item>
             <el-form-item label="小型轿车镀膜">
               <el-input v-model="form.customer_3_1"></el-input>
             </el-form-item>
-            <el-form-item label="MPV镀膜">
+            <el-form-item label="SUV/MPV镀膜">
               <el-input v-model="form.customer_3_2"></el-input>
             </el-form-item>
           </el-card>
