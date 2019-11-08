@@ -106,6 +106,25 @@
             </el-form-item>
           </el-card>
         </el-col>
+        <el-col :span="12" style="margin-top: 20px;">
+          <el-card shadow="hover">
+            <div slot="header" class="clearfix">
+              <span>banner设置</span>
+            </div>
+            <el-form-item label="c端banner：" label-width="100px">
+              <el-upload class="avatar-uploader" v-model="form.c_banner" :action="uploadUrl" :show-file-list="false" :on-success="handleUploadSuccessC">
+                <img v-if="form.c_banner" :src="form.c_banner" class="avatar">
+                <i v-else class="el-icon-plus avatar-uploader-icon" />
+              </el-upload>
+            </el-form-item>
+            <el-form-item label="b端banner：" label-width="100px">
+              <el-upload class="avatar-uploader" v-model="form.b_banner" :action="uploadUrl" :show-file-list="false" :on-success="handleUploadSuccessB">
+                <img v-if="form.b_banner" :src="form.b_banner" class="avatar">
+                <i v-else class="el-icon-plus avatar-uploader-icon" />
+              </el-upload>
+            </el-form-item>
+          </el-card>
+        </el-col>
       </el-form>
     </el-row>
     <div style="text-align: center;margin-top: 20px;">
@@ -130,8 +149,11 @@
     data() {
       return {
         form: {
-          deposits: []
+          deposits: [],
+          c_banner: '',
+          b_banner: ''
         },
+        uploadUrl: process.env.VUE_APP_BASE_API + '/system/upload',
         areaOptions: areaOptions
       }
     },
@@ -139,6 +161,12 @@
       this.getInfo()
     },
     methods: {
+      handleUploadSuccessC(res) {
+        this.form.c_banner = res.data.preview_url
+      },
+      handleUploadSuccessB(res) {
+        this.form.b_banner = res.data.preview_url
+      },
       handleDelSku(index) {
         this.form.deposits.splice(index, 1)
       },
@@ -168,4 +196,30 @@
 </script>
 
 <style>
+  .avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
 </style>
