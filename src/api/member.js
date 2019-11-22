@@ -18,6 +18,14 @@ export function edit(data) {
   })
 }
 
+export function deposit(data) {
+  return request({
+    url: model + '/deposit',
+    method: 'post',
+    data
+  })
+}
+
 export function create(data) {
   return request({
     url: model + '/create',

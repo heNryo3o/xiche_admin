@@ -132,7 +132,7 @@
 
           <el-card class="box-card mb-30" shadow="hover" v-if="info.detail.after_qianbaoxian">
             <div slot="header" class="clearfix">
-              <span style="font-weight: bold;">洗车前照片</span>
+              <span style="font-weight: bold;">洗车后照片</span>
             </div>
             <el-row :gutter="10" class="mb-20">
               <el-col :sm="8">

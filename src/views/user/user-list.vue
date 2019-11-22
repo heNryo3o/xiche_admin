@@ -62,6 +62,10 @@
 
         <el-table-column label="操作" fixed="right" min-width="230" class-name="small-padding fixed-width">
           <template slot-scope="{row}">
+            <el-button v-if="row.prefer == 2" v-waves v-permission="['role/edit-role']" type="primary" size="mini"
+              @click="handleDeposit(row)">
+              充值
+            </el-button>
             <el-button v-waves v-permission="['role/edit-role']" type="primary" size="mini" @click="handleUpdate(row)">
               编辑
             </el-button>
@@ -127,7 +131,8 @@
     changeStatus,
     changePassword,
     edit,
-    create
+    create,
+    deposit
   } from '@/api/member'
   import waves from '@/directive/waves' // waves directive
   import permission from '@/directive/permission'
@@ -214,6 +219,24 @@
     },
 
     methods: {
+      handleDeposit(row) {
+        this.$prompt('请填写充值金额', '充值', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消'
+        }).then(({
+          value
+        }) => {
+          deposit({
+            user_id: row.id,
+            money: value
+          }).then(response => {
+            this.$message({
+              type: 'success',
+              message: '充值成功'
+            })
+          })
+        })
+      },
       sortChange(data) {
         const {
           prop,
