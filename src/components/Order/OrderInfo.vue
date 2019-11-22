@@ -23,7 +23,7 @@
               <el-col :sm="8"><span class="info-label">订单类型：{{ info.type_name }}</span></el-col>
             </el-row>
             <el-row :gutter="10" class="mb-20">
-              <el-col :sm="12"><span class="info-label">洗车工接单/系统派单时间：{{ info.take_at }}</span></el-col>
+              <el-col :sm="12"><span class="info-label">洗车工接单/系统派单时间：{{ info.taken_at }}</span></el-col>
               <el-col :sm="12"><span class="info-label">开始洗车时间：{{ info.wash_at }}</span></el-col>
             </el-row>
           </el-card>
