@@ -22,7 +22,6 @@
             <span>{{ row.money }}</span>
           </template>
         </el-table-column>
-
         <el-table-column label="发放时间" width="250">
           <template slot-scope="{row}">
             <span>{{ row.created_at }}</span>
@@ -35,12 +34,32 @@
             </el-button>
           </template>
         </el-table-column>
-
       </el-table>
     </div>
+    <el-dialog title="发放优惠券" width="700px" :visible.sync="showCreateDialog">
+      <el-form ref="dataForm" :model="temp" label-position="left" label-width="120px" style="width: 400px; margin-left:50px;">
 
+        <el-form-item label="优惠券金额" prop="money">
+          <el-input v-model="temp.money" />
+        </el-form-item>
+
+        <el-form-item label="过期时间" prop="end_at">
+          <el-date-picker v-model="temp.end_at" value-format="yyyy-MM-dd" type="date" placeholder="选择日期" :picker-options="pickerOptions">
+          </el-date-picker>
+        </el-form-item>
+
+      </el-form>
+
+      <div slot="footer" class="dialog-footer" align="center">
+        <el-button @click="showCreateDialog = false">
+          取消
+        </el-button>
+        <el-button type="primary" @click="createCoupon()">
+          确认
+        </el-button>
+      </div>
+    </el-dialog>
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
-
   </div>
 </template>
 
@@ -64,6 +83,12 @@
     },
     data() {
       return {
+        temp: {},
+        pickerOptions: {
+          disabledDate(time) {
+            return time.getTime() < Date.now()
+          }
+        },
         typeOptions: [{
             name: '充值',
             key: 1
@@ -73,33 +98,6 @@
             key: 2
           }
         ],
-        pickerOptions: {
-          shortcuts: [{
-            text: '最近一周',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-              picker.$emit('pick', [start, end])
-            }
-          }, {
-            text: '最近一个月',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-              picker.$emit('pick', [start, end])
-            }
-          }, {
-            text: '最近三个月',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-              picker.$emit('pick', [start, end])
-            }
-          }]
-        },
         list: [],
         total: 0,
         listLoading: true,
@@ -109,25 +107,25 @@
           sort: '-id'
         },
         userVisible: false,
-        userId: 0
+        userId: 0,
+        showCreateDialog: false
       }
     },
     created() {
       this.getList()
     },
-
     methods: {
       destroy(id) {
         couponDestroy({
           id: id
         }).then(response => {
-            this.$notify({
-              title: '成功',
-              message: '删除优惠券成功',
-              type: 'success',
-              duration: 2000
-            })
-            this.getList()
+          this.$notify({
+            title: '成功',
+            message: '删除优惠券成功',
+            type: 'success',
+            duration: 2000
+          })
+          this.getList()
         })
       },
       getList() {
@@ -150,23 +148,21 @@
       },
 
       handleCreate() {
-        this.$prompt('请填写优惠券金额', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消'
-        }).then(({
-          value
-        }) => {
-          couponCreate({
-            money: value
-          }).then(response => {
-            this.$notify({
-              title: '成功',
-              message: '发放优惠券成功',
-              type: 'success',
-              duration: 2000
-            })
-            this.getList()
+        this.showCreateDialog = true
+      },
+      createCoupon() {
+        couponCreate({
+          money: this.temp.money,
+          end_at: this.temp.end_at
+        }).then(response => {
+          this.$notify({
+            title: '成功',
+            message: '发放优惠券成功',
+            type: 'success',
+            duration: 2000
           })
+          this.showCreateDialog = false
+          this.getList()
         })
       }
 
