@@ -40,7 +40,7 @@
 
         <el-table-column label="客户手机号码" width="180">
           <template slot-scope="{row}">
-            <span class="link-type" @click="handleViewUser(row.user_id)">{{ row.mobile }}</span>
+            <span class="link-type" @click="handleViewUser(row.user_id)">{{ row.user_mobile }}</span>
           </template>
         </el-table-column>
 
